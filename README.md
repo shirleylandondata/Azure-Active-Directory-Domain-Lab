@@ -193,8 +193,10 @@ Add-ADGroupMember -Identity "IT_Admins" -Members "alice.chen"
 | Machine inactivity limit | 900 sec | Auto-lock idle sessions |
 | Removable storage access | Deny all | Block USB-based data exfiltration |
 
-<!-- ![Group Policy Management console](your-screenshot-url-here) -->
-<!-- ![GPO settings](your-screenshot-url-here) -->
+<!-- !<img width="1500" height="558" alt="Screenshot 2026-08-09 212227" src="https://github.com/user-attachments/assets/a7186115-b8b0-4233-88f5-3d2f94eb8f4a" />
+[Group Policy Management console](your-screenshot-url-here) -->
+<!-- ![GPO settings](your-screenshot-url-here) --> <img width="920" height="576" alt="Screenshot 2026-08-09 212600" src="https://github.com/user-attachments/assets/68f54815-333a-4b0e-8662-eff12466a41b" />
+
 
 4. **Verify it actually works:** join a second VM to `Lab1VM.local`, move its computer object into the `IT` OU, run `gpupdate /force`, and confirm the screen-lock policy applies on login.
 

@@ -40,12 +40,14 @@ The lab consists of a single Domain Controller running AD DS + DNS for the `lab.
 ### 1. Launch the Windows Server Virtual Machine
 
 1. Sign in to the **Azure Portal** (portal.azure.com).
+
 2. Go to **Virtual machines → Create → Azure virtual machine**.
 
 <!-- ![Create VM](your-screenshot-url-here) --> <img width="1061" height="782" alt="VM_lab1 1" src="https://github.com/user-attachments/assets/b324c670-3415-478f-b83d-5cc72713bdd4" />
 
 3. Choose the **Windows Server 2025 Datacenter (Gen2)** image.
-4. Select a VM size — `Standard_B2s` (2 vCPU / 4GB RAM) is enough for this lab and fits within free-tier credit.
+
+4. **Select a VM size** — `Standard_B2s` (2 vCPU / 4GB RAM) is enough for this lab and fits within free-tier credit.
 
 <!-- ![Select image and size](your-screenshot-url-here) --> <img width="1062" height="832" alt="VM_lab1 2" src="https://github.com/user-attachments/assets/3c06a9c3-2f00-42b9-904f-26c8bdbba27b" />
 
@@ -54,12 +56,13 @@ The lab consists of a single Domain Controller running AD DS + DNS for the `lab.
 5. Configure **networking**:
    - Place the VM in your target Virtual Network (VNet) and subnet.
    - Leave **Public inbound ports** open for RDP if connecting over the internet.
+
 6. Set **Authentication type** to Password and record a strong admin password.
+
 7. Configure the **Network Security Group (NSG)** to allow:
    - TCP 3389 (RDP) from your IP
 
 <!-- ![Configure NSG](your-screenshot-url-here) --> <img width="1063" height="843" alt="VM Lab1 3" src="https://github.com/user-attachments/assets/469866ca-4f1f-4de5-bef8-e6330c458981" />
-
 
 8. Click **Review + Create**, then **Create**.
 
@@ -73,23 +76,26 @@ The lab consists of a single Domain Controller running AD DS + DNS for the `lab.
 ### 2. Connect to the Instance via RDP
 
 1. Once the VM is running, note its **public IP address** from the Overview page.
+
 2. In the Azure Portal, click **Connect → RDP → Download RDP File**.
    
 <!-- ![Connect via RDP](your-screenshot-url-here) --> <img width="1276" height="655" alt="VM_Lab1 5" src="https://github.com/user-attachments/assets/28c244da-aa18-4ca1-a3d8-15b6c33f591a" />
-3. Open the downloaded `.rdp` file with the native Remote Desktop app (not the browser console — clipboard sharing is limited there).
+
+3. **Open the downloaded** `.rdp` file with the native Remote Desktop app (not the browser console — clipboard sharing is limited there).
 <!-- ![Connect via RDP](your-screenshot-url-here) --> <img width="542" height="592" alt="Screenshot 2026-08-06 234258" src="https://github.com/user-attachments/assets/cec121b0-3b3c-4efe-bdbd-2b7a1e12193e" />
 
 4. Before connecting, click **Show Options → Local Resources tab** and check **Clipboard** so you can paste commands into the VM.
-5. Connect using the admin username and password you set at VM creation.
+
+5. **Connect using the admin username and password** you set at VM creation.
 
 <!-- ![Enable clipboard sharing](your-screenshot-url-here) --> <img width="543" height="597" alt="Screenshot 2026-08-06 234212" src="https://github.com/user-attachments/assets/f73eef91-5fa3-496b-a972-be215cb3c99f" />
-
 
 ---
 
 ### 3. Install Active Directory Domain Services (AD DS)
 
 1. In **Server Manager**, select **Manage → Add Roles and Features**.
+
 2. Proceed through the wizard:
    - Select **Role-based or feature-based installation**.
    - Choose your server.
@@ -113,12 +119,15 @@ Install-WindowsFeature -Name GPMC   # Group Policy Management Console — needed
 ### 4. Promote the Server to a Domain Controller
 
 1. After installation, click the **flag icon** in Server Manager.
+
 2. Select **Promote this server to a domain controller**.
+
 3. Choose:
    - **Add a new forest**
    - Root domain name: `lab.local`
 4. Set a **Directory Services Restore Mode (DSRM)** password.
-5. Accept the default DNS and NetBIOS options, complete the wizard, and let the server restart.
+
+5. **Accept the default DNS and NetBIOS options,** complete the wizard, and let the server restart.
 
 <!-- ![Promote to domain controller](your-screenshot-url-here) --> <img width="973" height="743" alt="Screenshot 2026-08-14 225405" src="https://github.com/user-attachments/assets/8454a5e3-d3d5-44b3-bf5c-0f5f0bdea6dc" />
 
@@ -139,7 +148,7 @@ Install-ADDSForest `
 
 ### 5. Build Out the Directory Structure
 
-1. Log in again after reboot.
+1. Log in again **after reboot.**
 
 
 2. Open **Active Directory Users and Computers (ADUC)** from the Tools menu.

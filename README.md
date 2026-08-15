@@ -9,7 +9,7 @@
 
 ## Overview
 
-## This guide provides step-by-step instructions to deploy and configure Active Directory Domain Services (AD DS) on a Windows Server virtual machine hosted in **Microsoft Azure**. 
+## This guide provides step-by-step instructions to deploy and configure Active Directory Domain Services (AD DS) on a Windows Server virtual machine hosted in **Microsoft Azure**, promoting it to a Domain Controller, and managing core identity components like Organizational Units (OUs), security groups, user accounts, and Group Policy.
 
 ## Watch Me Build This Lab Here!
 
@@ -100,6 +100,8 @@ The lab consists of a single Domain Controller running AD DS + DNS for the `lab.
 
 <!-- ![Select AD DS role](your-screenshot-url-here) --> <img width="982" height="705" alt="Screenshot 2026-08-06 235820" src="https://github.com/user-attachments/assets/2ac9f1f3-dbb9-47e9-b305-4e31f97b0059" />
 
+<img width="1085" height="661" alt="Screenshot 2026-08-14 224631" src="https://github.com/user-attachments/assets/cb1faa33-f1f7-4dfe-a371-5f168910c3f2" />
+
 
 Or install via PowerShell:
 
@@ -119,9 +121,12 @@ Install-WindowsFeature -Name GPMC   # Group Policy Management Console — needed
    - Root domain name: `lab.local`
 4. Set a **Directory Services Restore Mode (DSRM)** password.
 5. Accept the default DNS and NetBIOS options, complete the wizard, and let the server restart.
+<img width="973" height="743" alt="Screenshot 2026-08-14 225405" src="https://github.com/user-attachments/assets/399d7880-e42d-4dd3-99e9-e08fc6f44de2" />
 
-<!-- ![Promote to domain controller](your-screenshot-url-here) -->
-<!-- ![Set root domain name](your-screenshot-url-here) -->
+<!-- ![Promote to domain controller](your-screenshot-url-here) --> <img width="973" height="743" alt="Screenshot 2026-08-14 225405" src="https://github.com/user-attachments/assets/8454a5e3-d3d5-44b3-bf5c-0f5f0bdea6dc" />
+
+<!-- ![Set root domain name](your-screenshot-url-here) --> ![Uploading Screenshot 2026-08-14 225405.png…]()
+
 <!-- ![Installation progress](your-screenshot-url-here) -->
 
 Or promote via PowerShell:
@@ -198,7 +203,10 @@ Add-ADGroupMember -Identity "IT_Admins" -Members "alice.chen"
 <!-- ![GPO settings](your-screenshot-url-here) --> <img width="920" height="576" alt="Screenshot 2026-08-09 212600" src="https://github.com/user-attachments/assets/68f54815-333a-4b0e-8662-eff12466a41b" />
 
 
-4. **Verify it actually works:** join a second VM to `Lab1VM.local`, move its computer object into the `IT` OU, run `gpupdate /force`, and confirm the screen-lock policy applies on login.
+4. **Verify it actually works:** join a second VM to Lab1VM.local, move its computer object into the IT OU, run gpupdate /force, and confirm the screen-lock policy applies on login.
+
+<img width="1255" height="784" alt="Screenshot 2026-08-14 220904" src="https://github.com/user-attachments/assets/6664e3de-1804-4e94-a01a-ee9393e5dd59" />
+
 
 ---
 
@@ -233,6 +241,36 @@ Get-ADUser -Filter {LastLogonDate -lt $cutoff -and Enabled -eq $true} -Propertie
 | GPO linked | `Get-GPInheritance -Target 'OU=IT,DC=Lab1VM,DC=local'` | Shows `IT Security Policy` |
 
 ---
+**Proving GPO Enforcement on a Domain-Joined Client**
+
+Linking a GPO in the console isn't proof it's actually enforced — configuration that hasn't been verified on a real client isn't done, it's a guess. ClientVM was joined to Lab1VM.local, moved into the IT OU, and checked from four independent angles:
+
+**1. Computer object confirmed in the correct OU, pulling policy from the DC**
+
+powershell
+gpupdate /force
+gpresult /r
+
+Output confirms the computer object's distinguished name and that policy is coming from the real DC:
+
+CN=ClientVM,OU=IT,DC=Lab1VM,DC=local
+Group Policy was applied from:  Lab1-VM.Lab1VM.local
+
+<!-- ![gpresult computer settings — DN and applied-from](your-screenshot-url-here) --> <img width="798" height="716" alt="Screenshot 2026-08-14 233015" src="https://github.com/user-attachments/assets/64b87bf3-1001-4bad-9abd-4116442a78fe" />
+
+2. The GPO itself listed as applied, not filtered out
+
+Applied Group Policy Objects
+-----------------------------
+    IT Security Policy
+    Default Domain Policy
+<!-- ![gpresult — Applied Group Policy Objects list](your-screenshot-url-here) -->
+
+3. The enforced values actually present in Local Security Policy (secpol.msc)
+
+Both Minimum password length (12) and Password must meet complexity requirements (Enabled) appear with their controls greyed out — Windows' own way of confirming the value is locked in by a domain GPO and can't be changed locally on this machine.
+
+<!-- ![secpol.msc — password complexity setting greyed out and domain-enforced](your-screenshot-url-here) --> <img width="1013" height="775" alt="Screenshot 2026-08-14 220753" src="https://github.com/user-attachments/assets/957ae85a-9373-4cca-8bce-580f4d14a23f" />
 
 ## Troubleshooting
 

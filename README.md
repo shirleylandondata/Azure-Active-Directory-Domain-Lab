@@ -124,9 +124,6 @@ Install-WindowsFeature -Name GPMC   # Group Policy Management Console — needed
 
 <!-- ![Promote to domain controller](your-screenshot-url-here) --> <img width="973" height="743" alt="Screenshot 2026-08-14 225405" src="https://github.com/user-attachments/assets/8454a5e3-d3d5-44b3-bf5c-0f5f0bdea6dc" />
 
-<!-- ![Set root domain name](your-screenshot-url-here) --> ![Uploading Screenshot 2026-08-14 225405.png…]()
-
-<!-- ![Installation progress](your-screenshot-url-here) -->
 
 Or promote via PowerShell:
 

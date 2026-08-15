@@ -98,9 +98,7 @@ The lab consists of a single Domain Controller running AD DS + DNS for the `lab.
 
 <!-- ![Add Roles and Features wizard](your-screenshot-url-here) --> <img width="1417" height="778" alt="Screenshot 2026-08-06 235519" src="https://github.com/user-attachments/assets/d1664fb2-bb87-4132-accb-dca8be747a46" />
 
-<!-- ![Select AD DS role](your-screenshot-url-here) --> <img width="982" height="705" alt="Screenshot 2026-08-06 235820" src="https://github.com/user-attachments/assets/2ac9f1f3-dbb9-47e9-b305-4e31f97b0059" />
-
-<img width="1085" height="661" alt="Screenshot 2026-08-14 224631" src="https://github.com/user-attachments/assets/cb1faa33-f1f7-4dfe-a371-5f168910c3f2" />
+<!-- ![Select AD DS role](your-screenshot-url-here) --> <img width="1085" height="661" alt="Screenshot 2026-08-14 224631" src="https://github.com/user-attachments/assets/cb1faa33-f1f7-4dfe-a371-5f168910c3f2" />
 
 
 **Or install via PowerShell:**
@@ -182,14 +180,16 @@ New-ADUser -Name "alice.chen" -GivenName "Alice" -Surname "Chen" `
 
 Add-ADGroupMember -Identity "IT_Admins" -Members "alice.chen"
 # ...repeated per department
-
+```
 
 ---
 
 ### 6. Configure and Link a Group Policy Object (GPO)
 
 1. Open **Group Policy Management** from the Tools menu.
+
 2. Right-click the **IT** OU → **Create a GPO in this domain and link it here**.
+
 3. Name it `IT Security Policy` and edit it to configure:
 
 | Setting | Value | Purpose |
@@ -201,8 +201,8 @@ Add-ADGroupMember -Identity "IT_Admins" -Members "alice.chen"
 
 <!-- !<img width="1500" height="558" alt="Screenshot 2026-08-09 212227" src="https://github.com/user-attachments/assets/a7186115-b8b0-4233-88f5-3d2f94eb8f4a" />
 [Group Policy Management console](your-screenshot-url-here) -->
-<!-- ![GPO settings](your-screenshot-url-here) --> <img width="920" height="576" alt="Screenshot 2026-08-09 212600" src="https://github.com/user-attachments/assets/68f54815-333a-4b0e-8662-eff12466a41b" />
 
+<!-- ![GPO settings](your-screenshot-url-here) --> <img width="920" height="576" alt="Screenshot 2026-08-09 212600" src="https://github.com/user-attachments/assets/68f54815-333a-4b0e-8662-eff12466a41b" />
 
 4. **Verify it actually works:** join a second VM to Lab1VM.local, move its computer object into the IT OU, run gpupdate /force, and confirm the screen-lock policy applies on login.
 
@@ -213,7 +213,8 @@ Add-ADGroupMember -Identity "IT_Admins" -Members "alice.chen"
 
 ## Common Help Desk Tasks Practiced
 
-```powershell
+```powershell**
+
 # Password reset with forced change on next login
 Set-ADAccountPassword -Identity "bob.patel" -Reset -NewPassword (ConvertTo-SecureString "NewPass@2026!" -AsPlainText -Force)
 Set-ADUser -Identity "bob.patel" -ChangePasswordAtLogon $true
@@ -248,9 +249,10 @@ Linking a GPO in the console isn't proof it's actually enforced — configuratio
 
 **1. Computer object confirmed in the correct OU, pulling policy from the DC**
 
-powershell
+```powershell**
 gpupdate /force
 gpresult /r
+```
 
 Output confirms the computer object's distinguished name and that policy is coming from the real DC:
 
@@ -265,7 +267,6 @@ Applied Group Policy Objects
 -----------------------------
     IT Security Policy
     Default Domain Policy
-<!-- ![gpresult — Applied Group Policy Objects list](your-screenshot-url-here) -->
 
 3. The enforced values actually present in Local Security Policy (secpol.msc)
 

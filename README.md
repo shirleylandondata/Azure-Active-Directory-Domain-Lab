@@ -121,7 +121,6 @@ Install-WindowsFeature -Name GPMC   # Group Policy Management Console — needed
    - Root domain name: `lab.local`
 4. Set a **Directory Services Restore Mode (DSRM)** password.
 5. Accept the default DNS and NetBIOS options, complete the wizard, and let the server restart.
-<img width="973" height="743" alt="Screenshot 2026-08-14 225405" src="https://github.com/user-attachments/assets/399d7880-e42d-4dd3-99e9-e08fc6f44de2" />
 
 <!-- ![Promote to domain controller](your-screenshot-url-here) --> <img width="973" height="743" alt="Screenshot 2026-08-14 225405" src="https://github.com/user-attachments/assets/8454a5e3-d3d5-44b3-bf5c-0f5f0bdea6dc" />
 

@@ -103,7 +103,7 @@ The lab consists of a single Domain Controller running AD DS + DNS for the `lab.
 <img width="1085" height="661" alt="Screenshot 2026-08-14 224631" src="https://github.com/user-attachments/assets/cb1faa33-f1f7-4dfe-a371-5f168910c3f2" />
 
 
-Or install via PowerShell:
+**Or install via PowerShell:**
 
 ```powershell
 Install-WindowsFeature -Name AD-Domain-Services -IncludeManagementTools
@@ -158,7 +158,7 @@ Install-ADDSForest `
 <!-- ![Creating a new user](your-screenshot-url-here) --> <img width="552" height="509" alt="Screenshot 2026-08-07 001421" src="https://github.com/user-attachments/assets/5b946f92-d9b4-4dde-8617-3b2fc3754dfc" />
 
 
-**```powershell**
+```powershell**
 
 # Organizational Units
 New-ADOrganizationalUnit -Name "IT"        -Path "DC=Lab1VM,DC=local"

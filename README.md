@@ -125,7 +125,7 @@ Install-WindowsFeature -Name GPMC   # Group Policy Management Console — needed
 <!-- ![Promote to domain controller](your-screenshot-url-here) --> <img width="973" height="743" alt="Screenshot 2026-08-14 225405" src="https://github.com/user-attachments/assets/8454a5e3-d3d5-44b3-bf5c-0f5f0bdea6dc" />
 
 
-Or promote via PowerShell:
+**Or promote via PowerShell:**
 
 ```powershell
 Import-Module ADDSDeployment
@@ -142,18 +142,23 @@ Install-ADDSForest `
 ### 5. Build Out the Directory Structure
 
 1. Log in again after reboot.
+   
 2. Open **Active Directory Users and Computers (ADUC)** from the Tools menu.
-3. Create Organizational Units (OUs) for each department.
-4. Create role-based security groups inside each OU.
-5. Create test user accounts and add them to the appropriate group.
+
+3. Create **Organizational Units (OUs)** for each department.
+
+4. Create **role-based security groups** inside each OU.
+
+5. Create **test user accounts** and add them to the appropriate group.
 
 <!-- ![Active Directory Users and Computers](your-screenshot-url-here) -->
+
 <!-- ![Creating an OU](your-screenshot-url-here) --> <img width="981" height="687" alt="Screenshot 2026-08-07 000631" src="https://github.com/user-attachments/assets/b4755f01-cf30-4625-a18a-21e5e97ef1d7" />
 
 <!-- ![Creating a new user](your-screenshot-url-here) --> <img width="552" height="509" alt="Screenshot 2026-08-07 001421" src="https://github.com/user-attachments/assets/5b946f92-d9b4-4dde-8617-3b2fc3754dfc" />
 
 
-```powershell
+**```powershell**
 
 # Organizational Units
 New-ADOrganizationalUnit -Name "IT"        -Path "DC=Lab1VM,DC=local"

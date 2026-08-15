@@ -140,12 +140,16 @@ Install-ADDSForest `
 ### 5. Build Out the Directory Structure
 
 1. Log in again after reboot.
-   
+
+
 2. Open **Active Directory Users and Computers (ADUC)** from the Tools menu.
+
 
 3. Create **Organizational Units (OUs)** for each department.
 
+
 4. Create **role-based security groups** inside each OU.
+
 
 5. Create **test user accounts** and add them to the appropriate group.
 
@@ -156,7 +160,7 @@ Install-ADDSForest `
 <!-- ![Creating a new user](your-screenshot-url-here) --> <img width="552" height="509" alt="Screenshot 2026-08-07 001421" src="https://github.com/user-attachments/assets/5b946f92-d9b4-4dde-8617-3b2fc3754dfc" />
 
 
-```powershell**
+```powershell
 
 # Organizational Units
 New-ADOrganizationalUnit -Name "IT"        -Path "DC=Lab1VM,DC=local"
@@ -190,7 +194,7 @@ Add-ADGroupMember -Identity "IT_Admins" -Members "alice.chen"
 
 2. Right-click the **IT** OU → **Create a GPO in this domain and link it here**.
 
-3. Name it `IT Security Policy` and edit it to configure:
+3. **Name it `IT Security Policy`** and edit it to configure:
 
 | Setting | Value | Purpose |
 |---|---|---|
@@ -213,7 +217,7 @@ Add-ADGroupMember -Identity "IT_Admins" -Members "alice.chen"
 
 ## Common Help Desk Tasks Practiced
 
-```powershell**
+```powershell
 
 # Password reset with forced change on next login
 Set-ADAccountPassword -Identity "bob.patel" -Reset -NewPassword (ConvertTo-SecureString "NewPass@2026!" -AsPlainText -Force)
@@ -249,30 +253,34 @@ Linking a GPO in the console isn't proof it's actually enforced — configuratio
 
 **1. Computer object confirmed in the correct OU, pulling policy from the DC**
 
-```powershell**
+```powershell
 gpupdate /force
 gpresult /r
 ```
 
 Output confirms the computer object's distinguished name and that policy is coming from the real DC:
 
+```powershell
 CN=ClientVM,OU=IT,DC=Lab1VM,DC=local
 Group Policy was applied from:  Lab1-VM.Lab1VM.local
+```
 
 <!-- ![gpresult computer settings — DN and applied-from](your-screenshot-url-here) --> <img width="798" height="716" alt="Screenshot 2026-08-14 233015" src="https://github.com/user-attachments/assets/64b87bf3-1001-4bad-9abd-4116442a78fe" />
 
-2. The GPO itself listed as applied, not filtered out
+**2. The GPO itself listed as applied, not filtered out**
 
 Applied Group Policy Objects
 -----------------------------
     IT Security Policy
     Default Domain Policy
 
-3. The enforced values actually present in Local Security Policy (secpol.msc)
+**3. The enforced values actually present in Local Security Policy (secpol.msc)**
 
 Both Minimum password length (12) and Password must meet complexity requirements (Enabled) appear with their controls greyed out — Windows' own way of confirming the value is locked in by a domain GPO and can't be changed locally on this machine.
 
 <!-- ![secpol.msc — password complexity setting greyed out and domain-enforced](your-screenshot-url-here) --> <img width="1013" height="775" alt="Screenshot 2026-08-14 220753" src="https://github.com/user-attachments/assets/957ae85a-9373-4cca-8bce-580f4d14a23f" />
+
+---
 
 ## Troubleshooting
 

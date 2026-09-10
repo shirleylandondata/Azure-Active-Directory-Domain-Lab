@@ -14,7 +14,7 @@
 ## Watch Me Build This Lab Here!
 
 <!-- Replace with your own screen recording link (Loom, YouTube, etc.) once you have one -->
-- *[Add a walkthrough video link here]*
+[- *[Add a walkthrough video link here]*](https://www.loom.com/share/a571a7384bb541e9a4bcad4c75e04998)
 
 ---
 

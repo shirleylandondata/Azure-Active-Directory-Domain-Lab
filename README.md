@@ -11,10 +11,10 @@
 
 ## This guide provides step-by-step instructions to deploy and configure Active Directory Domain Services (AD DS) on a Windows Server virtual machine hosted in **Microsoft Azure**, promoting it to a Domain Controller, and managing core identity components like Organizational Units (OUs), security groups, user accounts, and Group Policy.
 
-## Watch Me Build This Lab Here!
+## Watch Me Walkthrough This Lab Here!
 
 <!-- Replace with your own screen recording link (Loom, YouTube, etc.) once you have one -->
-[- *[Add a walkthrough video link here]*](https://www.loom.com/share/a571a7384bb541e9a4bcad4c75e04998)
+[- *[Watch Now]*](https://www.loom.com/share/a571a7384bb541e9a4bcad4c75e04998)
 
 ---
 

@@ -1,4 +1,4 @@
-<img width="1180" height="463" alt="Screenshot 2026-09-10 200716" src="https://github.com/user-attachments/assets/85ee5e64-c971-439f-a81f-192e68ccf6db" />
+
 # Active Directory Setup and Configuration in Azure Microsoft Windows Server
 
 ## **Deploy and configure Active Directory Domain Services (AD DS) on a Windows Server virtual machine hosted in Microsoft Azure.**

@@ -1,3 +1,4 @@
+<img width="1180" height="463" alt="Screenshot 2026-09-10 200716" src="https://github.com/user-attachments/assets/85ee5e64-c971-439f-a81f-192e68ccf6db" />
 # Active Directory Setup and Configuration in Azure Microsoft Windows Server
 
 ## **Deploy and configure Active Directory Domain Services (AD DS) on a Windows Server virtual machine hosted in Microsoft Azure.**
@@ -119,17 +120,20 @@ Install-WindowsFeature -Name GPMC   # Group Policy Management Console — needed
 ### 4. Promote the Server to a Domain Controller
 
 1. After installation, click the **flag icon** in Server Manager.
+<img width="1180" height="463" alt="Screenshot 2026-09-10 200716" src="https://github.com/user-attachments/assets/4a446c5f-f5cd-4778-8d16-ac9aa3a19fd8" />
 
 2. Select **Promote this server to a domain controller**.
 
 3. Choose:
    - **Add a new forest**
    - Root domain name: `lab.local`
+<img width="941" height="706" alt="Screenshot 2026-09-10 200839" src="https://github.com/user-attachments/assets/18e945b3-c18d-4e65-a8f8-cbdd9e23fed3" />
+
 4. Set a **Directory Services Restore Mode (DSRM)** password.
 
 5. **Accept the default DNS and NetBIOS options,** complete the wizard, and let the server restart.
 
-<!-- ![Promote to domain controller](your-screenshot-url-here) --> <img width="973" height="743" alt="Screenshot 2026-08-14 225405" src="https://github.com/user-attachments/assets/8454a5e3-d3d5-44b3-bf5c-0f5f0bdea6dc" />
+<img width="928" height="694" alt="Screenshot 2026-09-10 201307" src="https://github.com/user-attachments/assets/45ef04b1-32f2-49f3-963e-20fc42c1318f" />
 
 
 **Or promote via PowerShell:**
